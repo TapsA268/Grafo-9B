@@ -29,7 +29,7 @@
                         <asp:TextBox ID="TextBox2" runat="server" Width="44px" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="col">
-                        <asp:Button ID="Button1" runat="server" Text="Agregar vertice" CssClass="btn btn-outline-light" OnClick="Button1_Click" />
+                        <asp:Button ID="Button1" runat="server" Text="Agregar vertice" CssClass="btn btn-outline-primary" OnClick="Button1_Click" />
                     </div>
                 </div>
             </div>
@@ -37,6 +37,12 @@
             <div class="container text-center">
                 <h3>Conectar a:</h3>
                 <hr class="my-4" />
+                 <div class="row g-3 mb-5">
+                <div class="col">
+                    <asp:TextBox ID="TextBox3" runat="server" Width="650px" ReadOnly="true" CssClass="alert alert-danger"
+                        Text="Usa los dropdown de Origen, Destino y Vértice para hacer los recorridos y búsquedas"></asp:TextBox>
+                </div>
+            </div>
                 <div class="row g-3 mb-5">
                     Origen: 
                 <div class="col">
@@ -51,7 +57,7 @@
                     <asp:TextBox ID="TextBox5" runat="server" Width="44px" CssClass="form-control"></asp:TextBox>
                 </div>
                     <div class="col">
-                        <asp:Button ID="Button2" runat="server" Text="Agregar arista" CssClass="btn btn-outline-light" OnClick="Button2_Click" />
+                        <asp:Button ID="Button2" runat="server" Text="Agregar arista" CssClass="btn btn-outline-primary" OnClick="Button2_Click" />
                     </div>
                 </div>
             </div>
@@ -86,38 +92,39 @@
             <hr class="my-4" />
             <div class="row mb-5">
                 <div class="col align-self-center">
-                    <asp:DropDownList ID="DropDownList3" runat="server" CssClass="btn btn-dark" Height="39px" Width="220px">
+                    <asp:DropDownList ID="DropDownList3" runat="server" CssClass="btn btn-dark" Height="39px" Width="400px">
                     </asp:DropDownList>
                 </div>
             </div>
 
             <div class="row mb-5">
                 <div class="col">
-                    <asp:Button ID="Button4" runat="server" Text="Recorrer DFS" CssClass="btn btn-outline-warning" OnClick="Button4_Click" />
+                    <asp:Button ID="Button4" runat="server" Text="Recorrer DFS" CssClass="btn btn-outline-light" OnClick="Button4_Click" />
                 </div>
                 <div class="col">
-                    <asp:Button ID="Button5" runat="server" Text="Recorrer BFS" CssClass="btn btn-outline-warning" OnClick="Button5_Click" />
+                    <asp:Button ID="Button5" runat="server" Text="Recorrer BFS" CssClass="btn btn-outline-light" OnClick="Button5_Click" />
                 </div>
                 <div class="col">
-                    <asp:Button ID="Button6" runat="server" Text="Busqueda Topológica" CssClass="btn btn-outline-warning" OnClick="Button6_Click" />
+                    <asp:Button ID="Button6" runat="server" Text="Busqueda Topológica por Vértice" CssClass="btn btn-outline-light" OnClick="Button6_Click" />
                 </div>
                 <div class="col">
-                    <asp:Button ID="Button8" runat="server" Text="Buscar aristas" CssClass="btn btn-outline-warning" OnClick="Button8_Click" />
+                    <asp:Button ID="Button8" runat="server" Text="Busqueda Topológica por Aristas" CssClass="btn btn-outline-light" OnClick="Button8_Click" />
                 </div>
                 <div class="col">
-                    <asp:Button ID="Button7" runat="server" Text="Encontrar camino más corto" CssClass="btn btn-outline-warning" OnClick="Button7_Click" />
+                    <asp:Button ID="Button7" runat="server" Text="Encontrar camino más corto" CssClass="btn btn-outline-light" OnClick="Button7_Click" />
                 </div>
             </div>
 
             <hr class="my-4" />
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col align-self-center">
                     <canvas id="Canvas1" width="1000" height="1000" style="border: 2px ridge #317A86"></canvas>
                 </div>
             </div>
-            <div class="row">
+
+            <div class="row mb-5">
                 <div class="col align-self-center">
-                    <asp:Button ID="Button9" runat="server" Text="Mostrar Grafo" CssClass="btn btn-outline-warning" OnClick="Button9_Click" />
+                    <asp:Button ID="Button9" runat="server" Text="Mostrar Grafo" CssClass="btn btn-outline-light" OnClick="Button9_Click" />
                 </div>
             </div>
         </div>

@@ -42,7 +42,7 @@
         const yyc = yc - trigo2.ObtenerOpuesto();
         var datos = `Nombre: ${vertice.entidadInfo.Nombre} Edad: ${vertice.entidadInfo.Edad}`
 
-        const circ = new Circulo(xxc, yyc, rad, '#04BF8A');
+        const circ = new Circulo(xxc, yyc, rad, '#10403B');
         circ.draw(context);
 
         // Guardar posición del vértice
