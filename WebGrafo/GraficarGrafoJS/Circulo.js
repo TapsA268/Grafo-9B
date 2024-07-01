@@ -8,12 +8,12 @@ class Circulo
         this.color = color;
     }
 
-    draw(contexto2) 
+    draw(contexto) 
     {
-        contexto2.beginPath();
-        contexto2.strokeStyle=this.color;
-        contexto2.arc(this.posiX, this.posiY, this.radio, 0, 2 * Math.PI);
-        contexto2.stroke();
-        contexto2.closePath();
+        contexto.beginPath();        
+        contexto.arc(this.posiX, this.posiY, this.radio, 0, 2 * Math.PI);
+        contexto.fillStyle = this.color;
+        contexto.fill();
+        contexto.closePath();
     }
 }

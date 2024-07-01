@@ -10,7 +10,7 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="GraficarGrafoJS/Circulo.js"></script>
     <script src="GraficarGrafoJS/Trigonometria.js"></script>
-    <script src="GraficarGrafoJS/graficarGrafo.js"></script>
+    <script src="GraficarGrafoJS/dibujarGrafo.js"></script>
 </head>
 <body style="background-color:#1A1C22">
     <form id="form1" runat="server">
