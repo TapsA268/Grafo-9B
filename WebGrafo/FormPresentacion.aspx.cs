@@ -11,7 +11,7 @@ namespace WebGrafo
 {
     public partial class FormPresentacion : System.Web.UI.Page
     {
-        public ClassBL objBL;
+        ClassBL objBL;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,8 +23,6 @@ namespace WebGrafo
             {
                 objBL = (ClassBL)Session["objBL"];
             }
-            string jsonGrafo = objBL.SerializarGrafo();
-            ClientScript.RegisterStartupScript(this.GetType(), "dibujarGrafo", $"dibujarGrafo('{jsonGrafo}');", true);
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -43,9 +41,7 @@ namespace WebGrafo
             }
             TextBox1.Text = "";
             TextBox2.Text = "";
-            string jsonGrafo = objBL.SerializarGrafo();
-            ClientScript.RegisterStartupScript(this.GetType(), "dibujarGrafo", $"dibujarGrafo('{jsonGrafo}');", true);
-
+            MostrarGrafo();
 
             string[] arrayTemp = objBL.MostrarVerticesBL();
             DropDownList1.Items.Clear();
@@ -73,11 +69,9 @@ namespace WebGrafo
 
                 TextBox6.Text = objBL.AgregarAristaBL(origen, destino, costo);
                 TextBox5.Text = "";
-                string jsonGrafo = objBL.SerializarGrafo();
-                ClientScript.RegisterStartupScript(this.GetType(), "dibujarGrafo", $"dibujarGrafo('{jsonGrafo}');", true);
+                MostrarGrafo();
             }
         }
-
         protected void Button3_Click(object sender, EventArgs e)
         {
             List<string> listTemp;
@@ -98,7 +92,6 @@ namespace WebGrafo
                 TextBox6.Text = msj;
             }
         }
-
         protected void Button4_Click(object sender, EventArgs e)
         {
             List<string> temp;
@@ -116,7 +109,6 @@ namespace WebGrafo
                 }
             }
         }
-
         protected void Button5_Click(object sender, EventArgs e)
         {
             List<string> temp;
@@ -134,7 +126,6 @@ namespace WebGrafo
                 }
             }
         }
-
         protected void Button6_Click(object sender, EventArgs e)
         {
             List<string> temp;
@@ -152,7 +143,6 @@ namespace WebGrafo
                 }
             }
         }
-
         protected void Button7_Click(object sender, EventArgs e)
         {
             int vertice = -5;
@@ -171,7 +161,6 @@ namespace WebGrafo
                 TextBox6.Text = msj;
             }
         }
-
         protected void Button8_Click(object sender, EventArgs e)
         {
             int origen = -5;
@@ -189,6 +178,15 @@ namespace WebGrafo
                     DropDownList3.Items.Add(Elemento.ToString());
                 }
             }
+        }
+        protected void Button9_Click(object sender, EventArgs e)
+        {
+            MostrarGrafo();
+        }
+        private void MostrarGrafo()
+        {
+            string jsonGrafo = objBL.SerializarGrafo();
+            ClientScript.RegisterStartupScript(this.GetType(), "dibujarGrafo", $"dibujarGrafo('{jsonGrafo}');", true);
         }
     }
 }

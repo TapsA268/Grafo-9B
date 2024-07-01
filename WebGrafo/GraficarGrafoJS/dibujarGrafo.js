@@ -1,7 +1,5 @@
 ﻿function dibujarGrafo(jsonGrafo)
 {
-    console.log(jsonGrafo)
-
     let grafo = jsonGrafo;
 
     try
@@ -17,7 +15,7 @@
     // Configuración del Canvas
     let grados = 0;
     const inc_grados = 360 / grafo.ListaAdyacencia.length; // Distribuir vértices uniformemente
-    const hip = 280;
+    const hip = 450;
     const rad = 50;
 
     // Contexto gráfico
@@ -42,7 +40,7 @@
         const trigo2 = new trigonometria((2 * Math.PI * grados) / 360, hip);
         const xxc = xc + trigo2.ObtenerAdyacente();
         const yyc = yc - trigo2.ObtenerOpuesto();
-        var datos = `Nombre: ${vertice.entidadInfo.Nombre}\n Edad: ${vertice.entidadInfo.Edad}`
+        var datos = `Nombre: ${vertice.entidadInfo.Nombre} Edad: ${vertice.entidadInfo.Edad}`
 
         const circ = new Circulo(xxc, yyc, rad, '#04BF8A');
         circ.draw(context);
@@ -53,7 +51,7 @@
         // Dibujar el texto dentro del círculo
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.font = "14px Arial";
+        context.font = "12px Arial";
         context.fillStyle = 'white';
         context.fillText(datos, xxc, yyc);
 
@@ -63,15 +61,15 @@
     // Función para dibujar flecha
     function dibujarFlecha(context, origenX, origenY, destinoX, destinoY)
     {
-        const headlen = 10; // length of head in pixels
+        const punta = 10;
         const dx = destinoX - origenX;
         const dy = destinoY - origenY;
         const angulo = Math.atan2(dy, dx);
         context.moveTo(origenX, origenY);
         context.lineTo(destinoX, destinoY);
-        context.lineTo(destinoX - headlen * Math.cos(angulo - Math.PI / 6), destinoY - headlen * Math.sin(angulo - Math.PI / 6));
+        context.lineTo(destinoX - punta * Math.cos(angulo - Math.PI / 6), destinoY - punta * Math.sin(angulo - Math.PI / 6));
         context.moveTo(destinoX, destinoY);
-        context.lineTo(destinoX - headlen * Math.cos(angulo + Math.PI / 6), destinoY - headlen * Math.sin(angulo + Math.PI / 6));
+        context.lineTo(destinoX - punta * Math.cos(angulo + Math.PI / 6), destinoY - punta * Math.sin(angulo + Math.PI / 6));
     }
 
     // Dibujar las aristas
@@ -91,11 +89,20 @@
             const finX = fin.x - rad * Math.cos(angulo);
             const finY = fin.y - rad * Math.sin(angulo);
 
+            context.lineWidth = 3;
             context.strokeStyle = '#026873';
             context.beginPath();
             dibujarFlecha(context, inicioX, inicioY, finX, finY);
             context.closePath();
             context.stroke();
+
+            const medX = (inicioX + finX) / 2;
+            const medY = (inicioY + finY) / 2;
+            const des = 10; 
+
+            context.fillStyle = 'white';
+            context.font = '12px Arial';
+            context.fillText(actual.costo, medX, medY + des);
 
             actual = actual.next;
         }
