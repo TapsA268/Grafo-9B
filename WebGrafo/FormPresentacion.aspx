@@ -40,7 +40,7 @@
                  <div class="row g-3 mb-5">
                 <div class="col">
                     <asp:TextBox ID="TextBox3" runat="server" Width="650px" ReadOnly="true" CssClass="alert alert-danger"
-                        Text="Usa los dropdown de Origen, Destino y Vértice para hacer los recorridos y búsquedas"></asp:TextBox>
+                        Text="Usa los dropdown de Origen, Destino y Vértice para hacer los recorridos y búsquedas."></asp:TextBox>
                 </div>
             </div>
                 <div class="row g-3 mb-5">

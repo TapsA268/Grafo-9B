@@ -1,13 +1,10 @@
-﻿function dibujarGrafo(jsonGrafo)
-{
-    let grafo = jsonGrafo;
+﻿function dibujarGrafo(jsonGrafo) {
+    let grafo;
 
-    try
-    {
+    try {
         grafo = JSON.parse(jsonGrafo);
     }
-    catch (error)
-    {
+    catch (error) {
         console.error("Error de conversión de JSON:", error);
         return;
     }
@@ -40,7 +37,7 @@
         const trigo2 = new trigonometria((2 * Math.PI * grados) / 360, hip);
         const xxc = xc + trigo2.ObtenerAdyacente();
         const yyc = yc - trigo2.ObtenerOpuesto();
-        var datos = `Nombre: ${vertice.entidadInfo.Nombre} Edad: ${vertice.entidadInfo.Edad}`
+        var datos = `Nombre: ${vertice.entidadInfo.Nombre}\nEdad: ${vertice.entidadInfo.Edad}`
 
         const circ = new Circulo(xxc, yyc, rad, '#10403B');
         circ.draw(context);
@@ -51,16 +48,19 @@
         // Dibujar el texto dentro del círculo
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.font = "12px Arial";
+        context.font = "10px Arial";
         context.fillStyle = 'white';
-        context.fillText(datos, xxc, yyc);
+        
+        const lineas = datos.split('\n');
+        lineas.forEach((linea, index) => {
+            context.fillText(linea, xxc, yyc + index * 10);
+        });
 
         grados += inc_grados; // Incrementar grados
     });
 
     // Función para dibujar flecha
-    function dibujarFlecha(context, origenX, origenY, destinoX, destinoY)
-    {
+    function dibujarFlecha(context, origenX, origenY, destinoX, destinoY) {
         const punta = 10;
         const dx = destinoX - origenX;
         const dy = destinoY - origenY;
@@ -96,13 +96,13 @@
             context.closePath();
             context.stroke();
 
-            const medX = (inicioX + finX) / 2;
-            const medY = (inicioY + finY) / 2;
-            const des = 10; 
+            const costX = inicioX + (finX - inicioX) / 3;
+            const costY = inicioY + (finY - inicioY) / 3;
+            const des = 10;
 
             context.fillStyle = 'white';
             context.font = '12px Arial';
-            context.fillText(actual.costo, medX, medY + des);
+            context.fillText(actual.costo, costX, costY + des);
 
             actual = actual.next;
         }
