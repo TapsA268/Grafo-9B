@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using ClassDAL;
 using ClassEntidades;
-using Newtonsoft.Json;
 
 namespace ClassBLL
 {
@@ -26,6 +26,14 @@ namespace ClassBLL
         {
             return grafo.MostrarVertices();
         }
+        public List<string> BusquedaTopologicaVerticeBL(int vertice)
+        {
+            return grafo.BusquedaTopologicaVertice(vertice);
+        }
+        public List<string> BusquedaTopologicaAristaBL(int origen, int destino)
+        {
+            return grafo.BusquedaTopologicaArista(origen, destino);
+        }
         public List<string> RecorrerDFS_BL(int vertice)
         {
             return grafo.RecorrerDFS(vertice);
@@ -34,21 +42,13 @@ namespace ClassBLL
         {
             return grafo.RecorrerBFS(verticeInicio);
         }
-        public List<string> BusquedaTopologicaVerticeBL(int vertice)
-        {
-            return grafo.BusquedaTopologicaVertice(vertice);
-        }
-        public List<int> EncontrarCaminoBL(int origen, int destino)
-        {
-            return grafo.EncontrarCaminos(origen, destino);
-        }
         public string[] Djikstra(int vertInicio, ref string msj)
         {
             return grafo.Djikstra(vertInicio, ref msj);
         }
         public string SerializarGrafo()
         {
-            string grafoSerializado = JsonConvert.SerializeObject(grafo);
+            string grafoSerializado=JsonConvert.SerializeObject(grafo);
             return grafoSerializado;
         }
     }

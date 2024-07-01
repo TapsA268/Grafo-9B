@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ClassEntidades;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -86,7 +87,7 @@ namespace ClassDAL
                 if (!visitados[v])
                 {
                     visitados[v] = true;
-                    listaResultados.Add($"{v}: {ListaAdyacencia[v].entidadInfo.Nombre}");
+                    listaResultados.Add($"Vértice {ListaAdyacencia[v].entidadInfo.Nombre} con índice {v}");
                     foreach (int i in ListaAdyacencia[v].ObtenerVecinos())
                     {
                         if (!visitados[i])
@@ -96,7 +97,6 @@ namespace ClassDAL
                     }
                 }
             }
-
             return listaResultados;
         }
         public List<string> RecorrerBFS(int verticeInicio)
@@ -111,7 +111,7 @@ namespace ClassDAL
             while (colaResultado.Count != 0)
             {
                 verticeInicio = colaResultado.Dequeue();
-                resultados.Add($"{verticeInicio}: {ListaAdyacencia[verticeInicio].entidadInfo.Nombre}");
+                resultados.Add($"Vértice {ListaAdyacencia[verticeInicio].entidadInfo.Nombre} con índice {verticeInicio}");
 
                 foreach (int v in ListaAdyacencia[verticeInicio].ObtenerVecinos())
                 {
@@ -144,49 +144,41 @@ namespace ClassDAL
 
             BusquedaTopologicaRecursiva(vertice, visitados, pila);
 
-            while (pila.Count != 0)
+            while (pila.Count > 0)
             {
-                result.Add($"Vértice con índice: {pila.Pop()}");
+                int vert = pila.Pop();
+                result.Add($"Vértice {ListaAdyacencia[vert].entidadInfo.Nombre} con índice: {vert}");
             }
             return result;
         }
-        public List<int> EncontrarCaminos(int origen, int destino)
+        public List<string> BusquedaTopologicaArista(int origen, int destino)
         {
-            List<string> OrdenTopologico = BusquedaTopologicaVertice(origen);
-            List<int> camino = new List<int>();
+            Stack<int> pila = new Stack<int>();
+            List<string> camino = new List<string>();
             Boolean[] visitados = new Boolean[ListaAdyacencia.Count];
-            Dictionary<int, int> pred = new Dictionary<int, int>();
-            Queue<int> cola = new Queue<int>();
 
-            cola.Enqueue(origen);
-            visitados[origen] = true;
+            BusquedaTopologicaRecursiva(origen, visitados, pila);
 
-            while (cola.Count > 0)
+            Boolean encontrado = false;
+
+            while (pila.Count != 0)
             {
-                int actual = cola.Dequeue();
-                if (actual == destino)
+                int vertice = pila.Pop();
+                if (vertice == origen)
                 {
-                    int rec = destino;
-                    while (rec != origen)
-                    {
-                        camino.Insert(0, rec);
-                        rec = pred[rec];
-                    }
-                    camino.Insert(0, origen);
-                    return camino;
+                    encontrado = true;
                 }
-                foreach (int vecino in ListaAdyacencia[actual].ObtenerVecinos())
+                if (encontrado)
                 {
-                    if (!visitados[vecino])
+                    camino.Add($"Vértice {ListaAdyacencia[vertice].entidadInfo.Nombre} con índice: {vertice}");
+                    if (vertice == destino)
                     {
-                        visitados[vecino] = true;
-                        pred[vecino] = actual;
-                        cola.Enqueue(vecino);
+                        return camino;
                     }
                 }
             }
-            return null;
-        }
+            return Enumerable.Empty<string>().ToList();
+        }       
         private int DistanciaMinima(float[] distancia, Boolean[] visitado)
         {
             float minimo = float.MaxValue;
@@ -214,10 +206,10 @@ namespace ClassDAL
         private string[] MostrarDjikstra(float[] distancia, int verticeInicio, ref string msj)
         {
             string[] resultado = new string[ListaAdyacencia.Count];
-            msj = $"Vértice de inicio: {verticeInicio}";
+            msj = $"Vértice de inicio: {ListaAdyacencia[verticeInicio].entidadInfo.Nombre}";
             for (int i = 0; i < distancia.Length; i++)
             {
-                resultado[i] = $"Vértice: {i} está en una distancia {distancia[i]}";
+                resultado[i] = $"{ListaAdyacencia[i].entidadInfo.Nombre} está en una distancia {distancia[i]}";
             }
             return resultado;
         }

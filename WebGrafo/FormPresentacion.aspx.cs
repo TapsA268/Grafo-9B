@@ -171,11 +171,11 @@ namespace WebGrafo
                 DropDownList3.Items.Clear();
                 origen = DropDownList4.SelectedIndex;
                 destino = DropDownList5.SelectedIndex;
-                List<int> ListaTemp = objBL.EncontrarCaminoBL(origen, destino);
+                List<string> ListaTemp = objBL.BusquedaTopologicaAristaBL(origen, destino);
 
-                foreach (int Elemento in ListaTemp)
+                foreach (string Elemento in ListaTemp)
                 {
-                    DropDownList3.Items.Add(Elemento.ToString());
+                    DropDownList3.Items.Add(Elemento);
                 }
             }
         }
